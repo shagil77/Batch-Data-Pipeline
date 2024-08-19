@@ -120,7 +120,10 @@ with DAG(
 
   markdown_path = "/opt/airflow/dags/scripts/dashboard/"
   q_cmd = f"cd {markdown_path} && quarto render {markdown_path}/dashboard.qmd"
-  gen_dashboard = BashOperator(task_id="generate_dashboard", bash_command=q_cmd)
+  gen_dashboard = BashOperator(
+    task_id="generate_dashboard", 
+    bash_command=q_cmd
+  )
 
   create_s3_bucket >> [user_purchase_to_s3, movie_review_to_s3]
 
